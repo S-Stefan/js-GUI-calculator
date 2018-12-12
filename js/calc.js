@@ -36,33 +36,24 @@ document.addEventListener("DOMContentLoaded", function(){
   // This is called when an operator button is clicked.
   function operatorButtonClicked() {
     var lastChar = calculationString[calculationString.length - 1];
-    if (lastChar == " ") {
+    if (isNaN(lastChar)) {
       calculationString += "";
     } else {
-      calculationString += " " + this.innerHTML + " ";
+      calculationString += this.innerHTML;
       updateScreen();
     }
   }
 
   // This is executed when the equals button is clicked.
   function equalsButtonClicked() {
-    var lastChar = calculationString[calculationString.length - 1];
-    var firstChar = calculationString[0];
-    console.log("THe first char is h" + firstChar + "ere" );
     // If there is nothing to calculate do nothing.
-    if (isNaN(calculationString[0])) {
+    if (isNaN(calculationString[0]) || isNaN(calculationString[calculationString.length - 1])) {
       return;
-    // If the last char in the calculation string is a space then do nothing.
-    } else if (lastChar == " ") {
-      calculationString += "";
-    } else if (firstChar == " ") {
-      console("Test!");
-      calculationString = calculationString.substring(1);
-      updateScreen();
     } else {
       var result = eval(calculationString);
       calculationString = result;
       updateScreen();
+      calculationString = "";
     }
   }
 
